@@ -1,2 +1,2 @@
-# roblox-tweenify
-Tweenify tool for Roblox Studio. Tween objects without coding!
+# roblox-animatify
+Animatify tool for Roblox Studio. Tween objects without coding!
