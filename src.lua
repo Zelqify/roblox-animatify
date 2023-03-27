@@ -4,12 +4,13 @@ local toolbar = plugin:CreateToolbar("Animatify " .. pluginVersion)
 local button = toolbar:CreateButton(
 	"Animatify",
 	"Animatify",
-	"rbxassetid://12255939830"
+	"rbxassetid://12918135608"
 )
 local UI = script.Parent.UI
 local Section2 = script.Parent.Section2
 local Section3 = script.Parent.Section3
 local Result = script.Parent.Result
+local canExit = false
 local WidgetInfo = DockWidgetPluginGuiInfo.new(Enum.InitialDockState.Float, false, false, 800,270,300,200)
 local Widget = plugin:CreateDockWidgetPluginGui("tweenify", WidgetInfo)
 Widget.Title = "Animatify " .. pluginVersion
@@ -100,6 +101,9 @@ Section3.GoBack.MouseButton1Up:Connect(function()
 	Length = 1
 end)
 Section3.Tweenify.MouseButton1Up:Connect(function()
+	if canExit == true then
+		isPreviewing = false
+	end
 	Section3.Visible = false
 	didChangeProperties = false
 	Backup.Parent = oldParent
@@ -162,9 +166,6 @@ while true do
 			for _,v in pairs(ignoreList) do
 				if v == valuechanged then return end
 			end
-			if valuechanged == "Color" then
-				print(selectedObject[valuechanged])
-			end
 			didChangeProperties = true
 			valuesChanged[valuechanged] = selectedObject[valuechanged]
 		end)
@@ -175,12 +176,14 @@ while true do
 		Length = tonumber(Section3.length.TextBox.Text)
 		if Length == nil then Length = 1 end
 		local newBackup = Backup:Clone()
+		canExit = false
 		local Tween = TweenService:Create(Backup, TweenInfo.new(Length, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), valuesChanged)
 		Tween:Play()
 		wait(Length)
-		if isPreviewing == false then return end
+		print(isPreviewing)
 		Backup:Destroy()
 		newBackup.Parent = oldParent
 		Backup = newBackup
+		canExit = true
 	end
 end
