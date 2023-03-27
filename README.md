@@ -1,5 +1,5 @@
 # roblox-animatify 1.0.0
-Made by Z_lqifh
+Made by Z_lqify
 Animatify tool for Roblox Studio. Tween objects without coding!
 
 # How to use?
