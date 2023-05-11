@@ -1,1 +1,1 @@
-wip
+-- Animatify @ 1.0.0 , past and future versions are deprecated.
